@@ -1,0 +1,18 @@
+clear yolov3Detect  
+test_ims=preprocessedTestData.UnderlyingDatastores{1, 1}.UnderlyingDatastores{1, 1}.Files;
+% test_ims=imds.Files;
+tt=imread(test_ims{1});
+imshow(tt);
+q_im=imresize(tt,[224 224]);
+imshow(q_im);
+% Display the detections on image.
+if ~isempty(results.Scores{1})
+    I = insertObjectAnnotation(q_im, 'rectangle', results.bxds{1}, results.Scores{1});
+end
+figure
+imshow(I)
+if ~isempty(results.Labels{1})
+    I = insertObjectAnnotation(q_im, 'rectangle', results.bxds{1}, results.Labels{1});
+end
+figure
+imshow(I)
